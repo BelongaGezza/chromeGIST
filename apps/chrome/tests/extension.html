@@ -1,0 +1,10 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>chromeGIST extension logic tests</title>
+<!-- Tests reader-core.js (ReaderView) and handoff.js on a plain page: no
+     extension APIs needed. Needs the WASM built with --features test-hooks
+     (tools/test-browser.sh does that). -->
+<link rel="stylesheet" href="../reader.css">
+<main id="app"></main>
+<pre id="results">running…</pre>
+<script type="module" src="extension.js"></script>

@@ -1,0 +1,8 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>chromeGIST WASM smoke test</title>
+<!-- Serve apps/chrome over HTTP (WASM can't load from file://), e.g.
+     python3 -m http.server --bind 127.0.0.1 8765 --directory apps/chrome
+     then open http://127.0.0.1:8765/tests/wasm-smoke.html -->
+<pre id="results">running…</pre>
+<script type="module" src="wasm-smoke.js"></script>

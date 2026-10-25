@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>chromeGIST reader preview</title>
+<!-- Dev only (not packaged): runs the reader with sample text over plain
+     HTTP, without extension APIs. Serve apps/chrome and open
+     http://127.0.0.1:<port>/dev/preview.html -->
+<link rel="stylesheet" href="../reader.css">
+<main id="app"></main>
+<script type="module">
+  import init, { Reader } from "../pkg/chromegist_wasm.js";
+  import { ReaderView } from "../reader-core.js";
+  await init();
+  const text = `Speed reading shows one word at a time, centred on its focus letter. ` +
+    `Numbers like 1,024 and sentence ends pause a little longer.\n\n` +
+    `A new paragraph pauses longest. Emoji and flags stay whole: 👍🏽 🇬🇧 👨‍👩‍👧.`;
+  window.view = new ReaderView(document.getElementById("app"), { onClose: () => view.pause() });
+  view.load(Reader, new URLSearchParams(location.search).get("text") ?? text);
+</script>
+</html>

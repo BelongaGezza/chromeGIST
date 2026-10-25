@@ -1,0 +1,26 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/chromegist-wasm",
+]
+
+[workspace.package]
+repository = "https://github.com/BelongaGezza/chromeGIST"
+
+[workspace.dependencies]
+# GIST's shared crates, pinned to a commit of github.com/BelongaGezza/gist.
+# This rev is the single source of truth for what chromeGIST builds against;
+# `tools/upstream-review.sh --record` moves it (and UPSTREAM_BASELINE) after a
+# review. Local GIST checkouts are NOT consulted.
+gist-model     = { git = "https://github.com/BelongaGezza/gist", rev = "9be170012211bd89d913338be1cae46dd566f786" }
+gist-parse-txt = { git = "https://github.com/BelongaGezza/gist", rev = "9be170012211bd89d913338be1cae46dd566f786" }
+gist-rsvp      = { git = "https://github.com/BelongaGezza/gist", rev = "9be170012211bd89d913338be1cae46dd566f786" }
+
+[profile.release]
+# Small .wasm for the extension package.
+opt-level = "s"
+lto = true
+# Measured on GIST 9be1700: codegen-units=1 -7 KB, strip -33 KB (drops the
+# name section); neither changes behaviour. Panics already abort on wasm32.
+codegen-units = 1
+strip = "symbols"

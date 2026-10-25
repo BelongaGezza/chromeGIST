@@ -1,0 +1,6 @@
+# The last GIST (github.com/BelongaGezza/gist) commit chromeGIST was reviewed and
+# tested against. Written by `tools/upstream-review.sh --record`; don't edit
+# by hand. History and notes: docs/ARCHITECTURE.md "Upstream baseline".
+commit=9be170012211bd89d913338be1cae46dd566f786
+branch=9be1700
+reviewed=2026-10-25

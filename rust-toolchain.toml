@@ -1,0 +1,9 @@
+[toolchain]
+# Independent of GIST's own rust-toolchain.toml (1.88.0) — that pin is
+# for GIST's own CI, and the git-dependency crates it exports have no MSRV
+# requirement of their own. Inherited from contextGIST, whose uniffi needed
+# a newer rustc; kept so both forks build with the same compiler.
+channel = "1.97.1"
+# The extension's core is WebAssembly (tools/build-wasm.sh). Native tests run
+# on the host target, which rustup always installs.
+targets = ["wasm32-unknown-unknown"]

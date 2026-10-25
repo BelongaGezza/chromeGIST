@@ -1,0 +1,59 @@
+# cargo-deny policy for chromeGIST. Mirrors GIST's deny.toml
+# (github.com/BelongaGezza/gist), trimmed to what this workspace's much
+# smaller graph needs (docs/SECURITY_REVIEW.md findings #6 and #7). Run from
+# the repo root:
+#
+#   cargo deny --exclude-dev check
+#
+# (`--exclude-dev` so test-only crates don't count against the policy.)
+
+[graph]
+# The shipped artefact is WebAssembly; the host target covers the native
+# test build.
+targets = ["wasm32-unknown-unknown", "aarch64-apple-darwin"]
+
+[licenses]
+# Same idea as GIST's allow-list, minus what this graph doesn't use. Anything
+# not listed is rejected, which keeps GPL/AGPL/LGPL/MPL out. Add a licence
+# here only with a comment saying why.
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "BSD-3-Clause",   # encoding_rs (via gist-parse-txt)
+    "Unicode-3.0",    # unicode-ident
+    "Unlicense",      # memchr, dual-licensed "Unlicense OR MIT"
+]
+# chromeGIST's own crate and GIST's gist-* crates are MIT but unpublished
+# (workspace/git) crates; they're first-party, not checked against the list.
+private = { ignore = true }
+
+[advisories]
+version = 2
+ignore = []
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+# GIST's crates are git deps pinned by `rev` (no `version =`), which
+# cargo-deny sees as "*"; the pin is the real constraint. Wildcard path deps
+# are allowed for workspace members only; a registry `foo = "*"` is still denied.
+allow-wildcard-paths = true
+deny = [
+    # chromeGIST must never gain networking or TLS. The extension CSP
+    # (`default-src 'none'; connect-src 'self'`) blocks network access at
+    # runtime, and code review covers the rest; this keeps the code out of
+    # the .wasm in the first place.
+    { name = "openssl" },
+    { name = "openssl-sys" },
+    { name = "rustls" },
+    { name = "ureq" },
+    { name = "reqwest" },
+    { name = "hyper" },
+    { name = "tokio" },
+]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-git = ["https://github.com/BelongaGezza/gist"]
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

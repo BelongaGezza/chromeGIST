@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chromeGIST Privacy Policy</title>
+<meta name="description" content="chromeGIST reads only the text you select, keeps it in memory, and never stores or sends it anywhere.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1d1d1f;
+    --muted: #5c5c63;
+    --rule: #dcdce0;
+    --accent: #b3261e;
+    --code-bg: #f3f3f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17171a;
+      --fg: #ececf0;
+      --muted: #a2a2ab;
+      --rule: #34343a;
+      --accent: #ff8a80;
+      --code-bg: #232328;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 42rem; margin: 0 auto; padding: 2.5rem 16px 4rem; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .25rem; }
+  h2 { font-size: 1.25rem; margin: 2.2rem 0 .5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+  p, li { margin: .6rem 0; }
+  ul { padding-left: 1.3rem; }
+  .meta { color: var(--muted); margin: 0 0 1.5rem; }
+  .summary { border-left: 4px solid var(--accent); padding: .1rem 1rem; background: var(--code-bg); border-radius: 0 6px 6px 0; }
+  code { background: var(--code-bg); padding: .1em .35em; border-radius: 4px; font-size: .92em; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+
+<h1>chromeGIST Privacy Policy</h1>
+<p class="meta">Applies to chromeGIST version 0.1.0 · Effective 25 October 2026</p>
+
+<div class="summary">
+  <p><strong>In short:</strong> chromeGIST reads only the text you select, only when you ask it to, and only in your browser's memory. It does not collect, store, sell, share or send your data anywhere. It has no accounts, no analytics and no network access.</p>
+</div>
+
+<h2>1. What chromeGIST is</h2>
+<p>chromeGIST is a Chrome extension that shows text you have selected on a web page one word at a time, at a pace you control (a "speed reader"). You select text, right-click, and choose <strong>Speed Read with chromeGIST</strong>. A small window then shows the words.</p>
+
+<h2>2. What information it receives</h2>
+<p>Only the text you selected, and only when you choose <strong>Speed Read with chromeGIST</strong> from the right-click menu. Chrome passes that selection to the extension when you click the menu item.</p>
+<p>chromeGIST does not see anything else. It cannot read the rest of the page, other tabs, your browsing history, form fields, the page address or title, or your clipboard. It asks Chrome for a single permission, <code>contextMenus</code>, which is what adds the right-click menu item. It has no access to websites, no content scripts and no storage permission.</p>
+
+<h2>3. What it stores</h2>
+<p>Nothing is saved to disk. There is no library, history, cache, cookie or settings file, and your reading speed is not remembered either.</p>
+<p>While you read, the selected text is held in the browser's memory:</p>
+<ul>
+  <li>briefly by the extension's background process, from your click until the reader window picks it up (it is deleted the moment it is picked up, or after 60 seconds if it is not);</li>
+  <li>by the reader window, for as long as that window is open.</li>
+</ul>
+<p>When you close the window, the text is discarded. chromeGIST does not overwrite that memory; it simply never writes the text anywhere.</p>
+
+<h2>4. What leaves your computer</h2>
+<p>Nothing. chromeGIST contains no code that sends data to any server, and Chrome is told to block the extension from contacting any other website. All of the reading logic runs locally in your browser. The extension does not load or run code from the internet; everything it runs is in the package you installed.</p>
+
+<h2>5. Selling, sharing and third parties</h2>
+<p>We do not collect your data, so we have none to sell, share or transfer. chromeGIST includes open-source software libraries that run locally inside the extension to split text into words and set the pace; they do not communicate with anyone. Their licences are listed in the extension's <code>THIRD_PARTY_NOTICES.txt</code>.</p>
+
+<h2>6. Incognito windows</h2>
+<p>chromeGIST works in Incognito only if you turn on <strong>Allow in Incognito</strong> for it in Chrome's extension settings. If you do, text selected in an incognito window is read in the incognito window and is handled the same way: held in memory only and not stored.</p>
+
+<h2>7. Things outside chromeGIST's control</h2>
+<ul>
+  <li><strong>The page and your system.</strong> The website, other extensions that can see that page, screen readers and your operating system's clipboard tools can see your selection independently of chromeGIST.</li>
+  <li><strong>Long selections.</strong> Chrome may shorten very long selections (about 7,500 words) before the extension receives them. chromeGIST cannot tell when this happens, so the reader reminds you at the end. This affects completeness only.</li>
+  <li><strong>Crash reports.</strong> If Chrome crashes while you are reading, and you have turned on Chrome's option to send usage statistics and crash reports, a report could contain some of the text in memory at the time. This is Chrome's behaviour, not something chromeGIST sends.</li>
+  <li><strong>Memory swapping.</strong> Your operating system may move browser memory to disk as it normally does.</li>
+</ul>
+
+<h2>8. Children</h2>
+<p>chromeGIST collects no personal information from anyone, including children.</p>
+
+<h2>9. Changes to this policy</h2>
+<p>If a future version changes what chromeGIST does with data, this page will be updated before that version is released, and the effective date and version above will change. Today's version collects nothing, so any change that begins to collect or send data would be a significant change.</p>
+
+<h2>10. Contact</h2>
+<p>Questions about this policy: <a href="https://github.com/BelongaGezza/chromeGIST/issues">open an issue on the chromeGIST GitHub repository</a></p>
+<p class="meta">Publisher: BelongaGezza</p>
+
+</main>
+</body>
+</html>

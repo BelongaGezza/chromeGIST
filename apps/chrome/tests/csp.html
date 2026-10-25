@@ -1,0 +1,22 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>chromeGIST CSP enforcement tests</title>
+<!-- Headless Chrome can't load an extension, so this page applies the
+     manifest's extension_pages policy as a <meta> CSP and then loads the real
+     test module under it. (A meta CSP enforces the same directives, but only
+     for resources loaded after it is inserted; the real manifest CSP is
+     still a manual check.) The inline bootstrap below runs before the policy
+     exists, by design. -->
+<link rel="stylesheet" href="../reader.css">
+<main id="app"></main>
+<pre id="results">running…</pre>
+<script>
+  (async () => {
+    const manifest = await (await fetch("../manifest.json")).json();
+    const meta = document.createElement("meta");
+    meta.httpEquiv = "Content-Security-Policy";
+    meta.content = manifest.content_security_policy.extension_pages;
+    document.head.appendChild(meta);
+    await import("./csp.js");
+  })();
+</script>

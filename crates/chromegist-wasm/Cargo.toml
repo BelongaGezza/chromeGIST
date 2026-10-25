@@ -1,0 +1,35 @@
+[package]
+name = "chromegist-wasm"
+version = "0.1.0"
+edition = "2021"
+publish = false
+license = "MIT"
+repository.workspace = true
+
+[lib]
+# cdylib: the .wasm module the Chrome extension loads (via wasm-bindgen).
+# rlib: so `cargo test` runs the same code natively.
+crate-type = ["cdylib", "rlib"]
+
+[features]
+# Test-only exports (e.g. Reader.panicForTest). tools/test-browser.sh builds
+# with it; release packaging must not.
+test-hooks = []
+
+[dependencies]
+# Reused as-is from GIST (github.com/BelongaGezza/gist) via a rev-pinned git
+# dependency declared in the workspace Cargo.toml — see CLAUDE.md's
+# "Relationship to GIST". No local fork/copy.
+gist-model     = { workspace = true }
+gist-parse-txt = { workspace = true }
+gist-rsvp      = { workspace = true }
+unicode-segmentation = "1"
+wasm-bindgen   = "0.2"
+
+# GIST's Document::new calls uuid::Uuid::now_v7(), which needs randomness and
+# a clock. On wasm32-unknown-unknown neither exists by default: uuid refuses
+# to compile without a randomness source. Its `js` feature gets both from the
+# browser (crypto.getRandomValues, Date). Enabled here rather than upstream:
+# Cargo unifies features, so this applies to gist-model's uuid too.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+uuid = { version = "1", features = ["js"] }
