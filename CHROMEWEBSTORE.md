@@ -87,13 +87,13 @@ default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-
 - **Data used for purposes unrelated to the single purpose, or for
   creditworthiness/lending:** no.
 - **Remote code:** no. All scripts and the `.wasm` are in the package.
-- **Privacy policy URL:** needed. The public page is `docs/site/privacy.html`
-  (plain-language, self-contained, no external resources), written from
-  `docs/PRIVACY.md`. It must be hosted at a public URL (for example GitHub
-  Pages from this repo once it is public). **Open items:** host it, and re-check it against
-  `docs/PRIVACY.md` whenever that changes. Its contact is the repo's GitHub
-  issues page and its publisher is BelongaGezza; change both if the listing
-  differs.
+- **Privacy policy URL:** <https://belongagezza.github.io/chromeGIST/site/privacy.html>
+  (GitHub Pages, served from `docs/` in this repo; the source is
+  `docs/site/privacy.html`, plain-language and self-contained, written from
+  `docs/PRIVACY.md`). Live and returning 200 on 2026-10-25. Re-check the page
+  against `docs/PRIVACY.md` whenever that changes. Its contact is the repo's
+  GitHub issues page and its publisher is BelongaGezza; change both if the
+  listing differs.
 
 Claims this rests on, and where they are verified:
 
@@ -128,7 +128,7 @@ include selected text in the report (`docs/PRIVACY.md` §5).
 ## Open items before submission
 
 - [ ] Developer account (one-off fee) and publisher identity.
-- [ ] Host `docs/site/privacy.html` and paste its URL.
+- [x] Privacy policy hosted (URL above); paste it into the dashboard.
 - [ ] Screenshots and optional promo tile.
 - [ ] The pre-submission manual checklist
   (`docs/DEVELOPMENT_PLAN.md` Phase 3).
