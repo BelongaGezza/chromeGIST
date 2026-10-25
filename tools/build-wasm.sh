@@ -24,6 +24,11 @@ ARGS=(-p chromegist-wasm --target wasm32-unknown-unknown)
 [ "$PROFILE" = release ] && ARGS+=(--release)
 [ -n "$FEATURES" ] && ARGS+=(--features "$FEATURES")
 echo "→ Building chromegist-wasm ($PROFILE, wasm32-unknown-unknown${FEATURES:+, features: $FEATURES})..."
+# Keep local paths out of the .wasm: rustc embeds source paths (panic
+# locations) for this repo and for every dependency under CARGO_HOME. Map them
+# to fixed names so a shipped build never contains the builder's home directory.
+SYSROOT="$(rustc --print sysroot)"
+export RUSTFLAGS="${RUSTFLAGS:-} --remap-path-prefix=${CARGO_HOME:-$HOME/.cargo}=/cargo --remap-path-prefix=$SYSROOT=/rust-toolchain --remap-path-prefix=$REPO_ROOT=/src"
 cargo build --locked "${ARGS[@]}"
 
 WANT="$(grep -A1 '^name = "wasm-bindgen"$' Cargo.lock | sed -n 's/version = "\(.*\)"/\1/p')"

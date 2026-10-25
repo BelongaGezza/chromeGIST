@@ -106,6 +106,14 @@ done
 if grep -aqiE 'panic_?for_?test' "$STAGE"/pkg/*; then
     die "package contains test-only code (panicForTest)"
 fi
+# Nothing of the builder's machine may ship: no home directory, repo path or
+# user name (rustc embeds source paths unless build-wasm.sh remaps them).
+for needle in "$HOME" "$REPO_ROOT" "$(id -un)"; do
+    [ -n "$needle" ] || continue
+    if grep -rlaF -- "$needle" "$STAGE" >/dev/null; then
+        die "package contains a local identifier ('$needle'): $(grep -rlaF -- "$needle" "$STAGE" | sed "s|$STAGE/||" | tr '\n' ' ')"
+    fi
+done
 find "$STAGE" -exec touch -t 202001010000 {} +
 
 # 6. Zip (sorted, no extra attributes) and write BUILD_INFO ------------------
